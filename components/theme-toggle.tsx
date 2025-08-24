@@ -2,7 +2,6 @@
 
 import { useTheme } from "@/hooks/use-theme"
 import { Button } from "@/components/ui/button"
-import { Sun, Moon, Monitor } from "lucide-react"
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme()
@@ -14,17 +13,6 @@ export function ThemeToggle() {
       setTheme("system")
     } else {
       setTheme("light")
-    }
-  }
-
-  const getIcon = () => {
-    switch (theme) {
-      case "light":
-        return <Sun className="h-4 w-4" />
-      case "dark":
-        return <Moon className="h-4 w-4" />
-      case "system":
-        return <Monitor className="h-4 w-4" />
     }
   }
 
@@ -44,10 +32,10 @@ export function ThemeToggle() {
       variant="ghost"
       size="sm"
       onClick={cycleTheme}
-      className="h-8 w-8 p-0 rounded-full hover:bg-accent/50 transition-all duration-200"
+      className="h-10 w-10 p-0 rounded-2xl bg-white/10 dark:bg-black/10 backdrop-blur-md border border-white/20 dark:border-white/10 hover:bg-white/20 dark:hover:bg-black/20 hover:scale-110 transition-all duration-300 shadow-lg hover:shadow-xl"
       title={`Current theme: ${theme}`}
     >
-      <span className="text-lg">{getLabel()}</span>
+      <span className="text-xl">{getLabel()}</span>
     </Button>
   )
 }

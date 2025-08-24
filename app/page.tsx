@@ -1,14 +1,14 @@
 "use client"
 
+import { motion, AnimatePresence } from "framer-motion"
 import { useOrientation } from "@/hooks/use-orientation"
 import { AlarmClock } from "@/components/alarm-clock"
 import { Stopwatch } from "@/components/stopwatch"
 import { Timer } from "@/components/timer"
 import { Weather } from "@/components/weather"
-import { Card } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { HelpSection } from "@/components/help-section"
+import { ParticleBackground } from "@/components/particle-background"
 import { RotateCcw, Smartphone, ExternalLink } from "lucide-react"
 import { useState, useEffect } from "react"
 
@@ -23,7 +23,7 @@ export default function HomePage() {
       const timer = setTimeout(() => {
         setIsTransitioning(false)
         setPreviousOrientation(orientation)
-      }, 300)
+      }, 400)
       return () => clearTimeout(timer)
     }
   }, [orientation, previousOrientation])
@@ -80,13 +80,13 @@ export default function HomePage() {
   const getFeatureColor = () => {
     switch (orientation) {
       case "portrait-up":
-        return "bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-200 dark:border-blue-800"
+        return "bg-amber-500/20 text-amber-700 dark:text-amber-300 border-amber-300/30 shadow-amber-500/20 shadow-lg"
       case "landscape-left":
-        return "bg-green-500/10 text-green-700 dark:text-green-400 border-green-200 dark:border-green-800"
+        return "bg-blue-500/20 text-blue-700 dark:text-blue-300 border-blue-300/30 shadow-blue-500/20 shadow-lg"
       case "portrait-down":
-        return "bg-purple-500/10 text-purple-700 dark:text-purple-400 border-purple-200 dark:border-purple-800"
+        return "bg-purple-500/20 text-purple-700 dark:text-purple-300 border-purple-300/30 shadow-purple-500/20 shadow-lg"
       case "landscape-right":
-        return "bg-orange-500/10 text-orange-700 dark:text-orange-400 border-orange-200 dark:border-orange-800"
+        return "bg-teal-500/20 text-teal-700 dark:text-teal-300 border-teal-300/30 shadow-teal-500/20 shadow-lg"
       default:
         return "bg-primary/10 text-primary border-primary/20"
     }
@@ -95,13 +95,13 @@ export default function HomePage() {
   const getBackgroundGradient = () => {
     switch (orientation) {
       case "portrait-up":
-        return "bg-gradient-to-br from-blue-50 via-background to-blue-100/20 dark:from-blue-950/20 dark:via-background dark:to-blue-900/10"
+        return "bg-gradient-to-br from-amber-50/50 via-background to-amber-100/30 dark:from-amber-950/30 dark:via-background dark:to-amber-900/20"
       case "landscape-left":
-        return "bg-gradient-to-br from-green-50 via-background to-green-100/20 dark:from-green-950/20 dark:via-background dark:to-green-900/10"
+        return "bg-gradient-to-br from-blue-50/50 via-background to-blue-100/30 dark:from-blue-950/30 dark:via-background dark:to-blue-900/20"
       case "portrait-down":
-        return "bg-gradient-to-br from-purple-50 via-background to-purple-100/20 dark:from-purple-950/20 dark:via-background dark:to-purple-900/10"
+        return "bg-gradient-to-br from-purple-50/50 via-background to-purple-100/30 dark:from-purple-950/30 dark:via-background dark:to-purple-900/20"
       case "landscape-right":
-        return "bg-gradient-to-br from-orange-50 via-background to-orange-100/20 dark:from-orange-950/20 dark:via-background dark:to-orange-900/10"
+        return "bg-gradient-to-br from-teal-50/50 via-background to-teal-100/30 dark:from-teal-950/30 dark:via-background dark:to-teal-900/20"
       default:
         return "bg-gradient-to-br from-background via-background to-muted/20"
     }
@@ -109,21 +109,28 @@ export default function HomePage() {
 
   return (
     <div
-      className={`min-h-screen p-4 flex transition-all duration-700 text-foreground justify-center items-center flex-col ${getBackgroundGradient()}`}
+      className={`min-h-screen p-4 flex transition-all duration-700 text-foreground justify-center items-center flex-col relative overflow-hidden ${getBackgroundGradient()}`}
     >
-      <div className="w-full max-w-md">
-        <div className="text-center mb-8 space-y-4">
-          <div className="flex items-center justify-between mb-4 text-slate-700 opacity-100">
+      <ParticleBackground />
+
+      <div className="w-full max-w-md relative z-10">
+        <motion.div
+          className="text-center mb-8 space-y-4"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="flex items-center justify-between mb-6">
             <div className="flex-1" />
             <div className="flex items-center gap-3">
               <div className="relative">
-                <Smartphone className="h-8 w-8 text-primary" />
+                <Smartphone className="h-8 w-8 text-primary drop-shadow-lg" />
                 <RotateCcw
-                  className="h-4 w-4 text-muted-foreground absolute -top-1 -right-1 animate-spin"
+                  className="h-4 w-4 text-muted-foreground absolute -top-1 -right-1 animate-spin drop-shadow-sm"
                   style={{ animationDuration: "3s" }}
                 />
               </div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              <h1 className="text-4xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent drop-shadow-lg">
                 Flip2Function
               </h1>
             </div>
@@ -132,59 +139,68 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="space-y-2">
-            <Badge
-              variant="secondary"
-              className={`px-4 py-2 text-sm font-medium transition-all duration-500 ${getFeatureColor()}`}
+          <div className="space-y-3">
+            <motion.div
+              className={`inline-flex px-6 py-3 text-base font-bold rounded-2xl backdrop-blur-md border transition-all duration-500 ${getFeatureColor()}`}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               {getFeatureName()}
-            </Badge>
-            <p className="text-xs text-muted-foreground leading-relaxed">{getOrientationInstruction()}</p>
+            </motion.div>
+            <p className="text-sm text-muted-foreground/80 leading-relaxed font-medium">
+              {getOrientationInstruction()}
+            </p>
           </div>
-        </div>
+        </motion.div>
 
         <div className="relative">
-          {isTransitioning && (
-            <div className="absolute inset-0 bg-background/80 backdrop-blur-sm rounded-xl z-10 flex items-center justify-center transition-opacity duration-300">
-              <div className="flex flex-col items-center gap-2">
-                <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-                <span className="text-sm text-muted-foreground">Switching to {getFeatureName()}...</span>
-              </div>
-            </div>
-          )}
-
-          <Card
-            className={`p-6 shadow-xl border-0 bg-card/80 backdrop-blur-md transition-all duration-500 ease-out rounded-xl ${
-              isTransitioning ? "scale-95 opacity-50" : "scale-100 opacity-100"
-            }`}
-          >
-            <div className={`transition-all duration-300 ${isTransitioning ? "blur-sm" : "blur-0"}`}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={orientation}
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: -20 }}
+              transition={{
+                duration: 0.4,
+                ease: [0.4, 0, 0.2, 1],
+                scale: { duration: 0.3 },
+              }}
+              className="bg-white/10 dark:bg-black/10 backdrop-blur-xl rounded-2xl border border-white/20 dark:border-white/10 shadow-2xl p-8 hover:shadow-3xl transition-all duration-300"
+              whileHover={{ scale: 1.02 }}
+            >
               {renderFeature()}
-            </div>
-          </Card>
+            </motion.div>
+          </AnimatePresence>
         </div>
 
         <HelpSection />
 
-        <footer className="mt-8 pt-6 border-t border-border/30">
+        <motion.footer
+          className="mt-8 pt-6 border-t border-white/10 dark:border-white/5"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8, duration: 0.6 }}
+        >
           <div className="text-center">
-            <p className="text-sm text-muted-foreground mb-2">
+            <p className="text-sm text-muted-foreground/80 mb-3 font-medium">
               Designed by{" "}
-              <span className="font-semibold text-foreground bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              <span className="font-bold text-foreground bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                 Manoj
               </span>
             </p>
-            <a
+            <motion.a
               href="https://www.linkedin.com/in/venkata-manoj/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-xs text-primary hover:text-primary/80 transition-all duration-200 hover:underline hover:scale-105"
+              className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-all duration-300 hover:underline bg-white/5 dark:bg-black/5 backdrop-blur-sm px-4 py-2 rounded-xl border border-white/10 dark:border-white/5"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               Connect on LinkedIn
-              <ExternalLink className="h-3 w-3" />
-            </a>
+              <ExternalLink className="h-4 w-4" />
+            </motion.a>
           </div>
-        </footer>
+        </motion.footer>
       </div>
     </div>
   )
