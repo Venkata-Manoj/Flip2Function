@@ -70,7 +70,7 @@ export function HelpSection() {
             >
               <span className="text-xl">{item.icon}</span>
               <div className="flex-1">
-                <div className="text-sm font-medium text-black">{item.orientation}</div>
+                <div className="text-sm font-medium text-black bg-white">{item.orientation}</div>
                 <div className={`text-xs ${item.color}`}>{item.feature}</div>
               </div>
             </div>
