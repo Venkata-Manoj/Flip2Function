@@ -1,30 +1,48 @@
-# No content
+📱 Flip2Function
 
-*Automatically synced with your [v0.app](https://v0.app) deployments*
+Flip2Function is a mobile-first, orientation-aware web app that dynamically changes its functionality depending on how the user holds their phone. It’s designed for hackathons and showcases AI-first development using v0 by Vercel, ChatGPT.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/manojs-projects-63f281a3/v0-no-content)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app/chat/projects/jtV7I9XRg5F)
+🌐 Live Demo: https://v0-no-content-hazel-nu.vercel.app/
 
-## Overview
+🚀 Features
 
-This repository will stay in sync with your deployed chats on [v0.app](https://v0.app).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.app](https://v0.app).
+Portrait Upright → Alarm Clock ⏰
 
-## Deployment
+Set an alarm and get notified when the time is reached.
 
-Your project is live at:
+Landscape Left → Stopwatch ⏱
 
-**[https://vercel.com/manojs-projects-63f281a3/v0-no-content](https://vercel.com/manojs-projects-63f281a3/v0-no-content)**
+Start, pause, resume, and reset with millisecond precision.
 
-## Build your app
+Portrait Upside Down → Timer ⌛
 
-Continue building your app on:
+Set a countdown timer with alert at completion.
 
-**[https://v0.app/chat/projects/jtV7I9XRg5F](https://v0.app/chat/projects/jtV7I9XRg5F)**
+Landscape Right → Weather 🌤
 
-## How It Works
+Fetches real-time weather using OpenWeatherMap API and navigator.geolocation.
 
-1. Create and modify your project using [v0.app](https://v0.app)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+🎨 UI/UX Highlights
+
+Mobile-first design → Fully responsive and optimized for touch devices.
+
+Seamless orientation transitions → Modes switch instantly as device rotates.
+
+Dark/Light/System themes → User can toggle between modes, with system preference respected.
+
+Smooth animations → Tailwind transitions and card-based layouts.
+
+🛠 Tech Stack
+
+Framework → Next.js
+ (via v0 by Vercel)
+
+Styling → Tailwind CSS
+
+Icons → Lucide Icons
+
+Deployment → Vercel
+
+AI Tools → v0 by Vercel, ChatGPT
+
+Weather API → OpenWeatherMap
