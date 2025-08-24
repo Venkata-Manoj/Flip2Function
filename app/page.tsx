@@ -7,7 +7,7 @@ import { Timer } from "@/components/timer"
 import { Weather } from "@/components/weather"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { RotateCcw, Smartphone } from "lucide-react"
+import { RotateCcw, Smartphone, ExternalLink } from "lucide-react"
 import { useState, useEffect } from "react"
 
 export default function HomePage() {
@@ -163,6 +163,23 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+
+        <footer className="mt-8 pt-6 border-t border-border/50">
+          <div className="text-center">
+            <p className="text-sm text-muted-foreground mb-2">
+              Designed by <span className="font-medium text-foreground">Manoj</span>
+            </p>
+            <a
+              href="https://www.linkedin.com/in/venkata-manoj/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-xs text-primary hover:text-primary/80 transition-colors duration-200 hover:underline"
+            >
+              Connect on LinkedIn
+              <ExternalLink className="h-3 w-3" />
+            </a>
+          </div>
+        </footer>
       </div>
     </div>
   )
